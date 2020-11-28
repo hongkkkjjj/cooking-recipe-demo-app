@@ -26,10 +26,6 @@
 		2B0F7A1F2570E2D100919C37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B0F7A222570E2D100919C37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B0F7A242570E2D100919C37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B0F7A2D2570E2D200919C37 /* Easy_CookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easy_CookTests.swift; sourceTree = "<group>"; };
-		2B0F7A2F2570E2D200919C37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B0F7A382570E2D200919C37 /* Easy_CookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easy_CookUITests.swift; sourceTree = "<group>"; };
-		2B0F7A3A2570E2D200919C37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C6F9888EF99DFA593A549AA /* Pods-Easy Cook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Cook.debug.xcconfig"; path = "Target Support Files/Pods-Easy Cook/Pods-Easy Cook.debug.xcconfig"; sourceTree = "<group>"; };
 		EDD47EBC4E905CCB867EE632 /* Pods-Easy Cook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Cook.release.xcconfig"; path = "Target Support Files/Pods-Easy Cook/Pods-Easy Cook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,8 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				2B0F7A152570E2CE00919C37 /* Easy Cook */,
-				2B0F7A2C2570E2D200919C37 /* Easy CookTests */,
-				2B0F7A372570E2D200919C37 /* Easy CookUITests */,
 				2B0F7A142570E2CE00919C37 /* Products */,
 				BBCE65CD66F35616A73B47D8 /* Pods */,
 				61F6F6E8FEE6FB0BA903B410 /* Frameworks */,
@@ -77,24 +71,6 @@
 				2B0F7A492570EDB500919C37 /* ViewController */,
 			);
 			path = "Easy Cook";
-			sourceTree = "<group>";
-		};
-		2B0F7A2C2570E2D200919C37 /* Easy CookTests */ = {
-			isa = PBXGroup;
-			children = (
-				2B0F7A2D2570E2D200919C37 /* Easy_CookTests.swift */,
-				2B0F7A2F2570E2D200919C37 /* Info.plist */,
-			);
-			path = "Easy CookTests";
-			sourceTree = "<group>";
-		};
-		2B0F7A372570E2D200919C37 /* Easy CookUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2B0F7A382570E2D200919C37 /* Easy_CookUITests.swift */,
-				2B0F7A3A2570E2D200919C37 /* Info.plist */,
-			);
-			path = "Easy CookUITests";
 			sourceTree = "<group>";
 		};
 		2B0F7A492570EDB500919C37 /* ViewController */ = {
