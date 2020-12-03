@@ -1,3 +1,28 @@
-PODFILE CHECKSUM: 643812c9f0b96593d8dfdfa170cbf2bf5455fbf5
+PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - lottie-ios (3.1.8)
+  - SDWebImage (5.9.4):
+    - SDWebImage/Core (= 5.9.4)
+  - SDWebImage/Core (5.9.4)
+
+DEPENDENCIES:
+  - FMDB (~> 2.7)
+  - lottie-ios (~> 3.1)
+  - SDWebImage
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - lottie-ios
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
+
+PODFILE CHECKSUM: b5307a952ca833df101b371bd541e69c96b2bdb3
 
 COCOAPODS: 1.8.4

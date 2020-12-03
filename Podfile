@@ -6,6 +6,8 @@ target 'Easy Cook' do
   use_frameworks!
 
   # Pods for Easy Cook
-
-
+  pod 'FMDB', '~> 2.7'
+  pod 'lottie-ios', '~> 3.1'
+  pod 'SDWebImage'
+  
 end
