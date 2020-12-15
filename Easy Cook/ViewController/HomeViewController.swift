@@ -95,7 +95,13 @@ extension HomeViewController: UICollectionViewDataSource {
             
                 let row = indexPath.row
                 popularCell.recipeTitleLabel.text = popularRecipeList[row].name
-                popularCell.recipeImageView.sd_setImage(with: URL(string: popularRecipeList[row].image), placeholderImage: nil)
+                if popularRecipeList[row].image.contains("https:"), let url = URL(string: popularRecipeList[row].image) {
+                    popularCell.recipeImageView.sd_setImage(with: url, placeholderImage: nil)
+                } else {
+                    if let data = popularRecipeList[row].image.fromBase64() {
+                        popularCell.recipeImageView.image = UIImage(data: data)
+                    }
+                }
             
                 return popularCell
             }
@@ -104,7 +110,13 @@ extension HomeViewController: UICollectionViewDataSource {
             
                 let row = indexPath.row
                 favouriteCell.recipeTitleLabel.text = favouriteRecipeList[row].name
-                favouriteCell.recipeImageView.sd_setImage(with: URL(string: favouriteRecipeList[row].image), placeholderImage: nil)
+                if favouriteRecipeList[row].image.contains("https:"), let url = URL(string: favouriteRecipeList[row].image) {
+                    favouriteCell.recipeImageView.sd_setImage(with: url, placeholderImage: nil)
+                } else {
+                    if let data = favouriteRecipeList[row].image.fromBase64() {
+                        favouriteCell.recipeImageView.image = UIImage(data: data)
+                    }
+                }
             
                 return favouriteCell
             }

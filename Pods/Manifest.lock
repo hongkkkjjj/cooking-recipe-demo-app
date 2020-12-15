@@ -1,4 +1,6 @@
 PODS:
+  - AEXML (4.6.0)
+  - DropDown (2.3.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -6,23 +8,33 @@ PODS:
   - SDWebImage (5.9.4):
     - SDWebImage/Core (= 5.9.4)
   - SDWebImage/Core (5.9.4)
+  - SWXMLHash (5.0.1)
 
 DEPENDENCIES:
+  - AEXML (~> 4.6)
+  - DropDown (= 2.3)
   - FMDB (~> 2.7)
   - lottie-ios (~> 3.1)
   - SDWebImage
+  - SWXMLHash (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
+    - AEXML
+    - DropDown
     - FMDB
     - lottie-ios
     - SDWebImage
+    - SWXMLHash
 
 SPEC CHECKSUMS:
+  AEXML: 2fbb73d8724797ed2cde888731e176fa4d44dd83
+  DropDown: e93a76d5a4fb6abc22e2bc1139544c56d15e5f94
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
+  SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
 
-PODFILE CHECKSUM: b5307a952ca833df101b371bd541e69c96b2bdb3
+PODFILE CHECKSUM: f105271125c256115dd82f8483408fd3885ad8f2
 
 COCOAPODS: 1.8.4

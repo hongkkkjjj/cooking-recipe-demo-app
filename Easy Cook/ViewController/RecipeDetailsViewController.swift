@@ -26,31 +26,58 @@ class RecipeDetailsViewController: UIViewController {
     private var likeCount = 0
     internal var recipeDetail = RecipeDetail()
     internal var isFavorRecipe: Bool = false
+    internal var afterAdd: Bool = false
     
     // MARK: - Override
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if !isFavorRecipe {
-            // check db here
-            isFavorRecipe = FMDBDatabaseModel.checkIsFavorRecipe(rid: recipeDetail.id)
-        }
+        
         setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        if afterAdd {
+            self.navigationItem.hidesBackButton = true
+            let button = UIButton(type: .system)
+            button.setTitle("Back", for: .normal)
+            let config = UIImage.SymbolConfiguration(pointSize: 17.0, weight: .bold)
+            button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
+            button.addTarget(self, action: #selector(back(sender:)), for: .touchUpInside)
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailToEdit" {
+            if let vc = segue.destination as? RecipeEditViewController {
+                vc.selectedRecipe = self.recipeDetail
+            }
+        }
     }
     
     // MARK: - Private func
     
     private func setupView() {
+        if !isFavorRecipe {
+            // check db here
+            isFavorRecipe = FMDBDatabaseModel.checkIsFavorRecipe(rid: recipeDetail.id)
+        }
+        
         setupButtonAttributedText()
         
         recipeNameLabel.text = recipeDetail.name
         recipeImageView.layer.cornerRadius = 5
-        recipeImageView.sd_setImage(with: URL(string: recipeDetail.image), completed: nil)
+        if recipeDetail.image.contains("https:"), let url = URL(string: recipeDetail.image) {
+            recipeImageView.sd_setImage(with: url, completed: nil)
+        } else {
+            if let data = recipeDetail.image.fromBase64() {
+                recipeImageView.image = UIImage(data: data)
+            }
+        }
         let image = isFavorRecipe ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         favouriteButton.setImage(image, for: .normal)
         likeCount = recipeDetail.likes
@@ -77,6 +104,27 @@ class RecipeDetailsViewController: UIViewController {
         let attributedText = NSAttributedString(string: "Report recipe?", attributes: attributes)
         reportRecipeButton.setAttributedTitle(attributedText, for: .normal)
     }
+    
+    private func refreshRecipeDetail() {
+        if let recipe = FMDBDatabaseModel.getSelectedRecipe(rid: self.recipeDetail.id) {
+            self.recipeDetail = recipe
+            setupView()
+        }
+    }
+    
+    // MARK: - Objc func
+    
+    @objc private func back(sender: UIBarButtonItem) {
+        if let vc = self.navigateBackToViewController(TabBarViewController.self, animated: true) {
+            print("Go back to main menu")
+        }
+    }
+    
+    // MARK: - Internal func
+    
+    internal func refreshDetail() {
+        refreshRecipeDetail()
+    }
 
     // MARK: - IBAction
     
@@ -87,7 +135,7 @@ class RecipeDetailsViewController: UIViewController {
         totalLikesLabel.text = "\(likeCount) likes"
         isFavorRecipe = !isFavorRecipe
         // update db
-        let success = FMDBDatabaseModel.updateRecipe(id: recipeDetail.id, type: .likes, value: likeCount, addFavor: isFavorRecipe)
+        let success = FMDBDatabaseModel.updateRecipeViewAndLike(id: recipeDetail.id, type: .likes, value: likeCount, addFavor: isFavorRecipe)
         print("Update like success: \(success)")
     }
     
@@ -112,5 +160,10 @@ class RecipeDetailsViewController: UIViewController {
             vc.modalTransitionStyle = .crossDissolve
             present(vc, animated: true, completion: nil)
         }
+    }
+    
+    
+    @IBAction func editRecipeAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "detailToEdit", sender: nil)
     }
 }

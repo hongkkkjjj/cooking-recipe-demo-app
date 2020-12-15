@@ -19,6 +19,9 @@
 		2B0F7A6425748DF400919C37 /* FavouriteRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7A6325748DF400919C37 /* FavouriteRecipeViewController.swift */; };
 		2B0F7A6A2574949F00919C37 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7A692574949F00919C37 /* FavouriteTableViewCell.swift */; };
 		2B0F7A6E2574A5C700919C37 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0F7A6D2574A5C700919C37 /* Utility.swift */; };
+		2B1EA2AF257FDF0B00C33819 /* recipeType.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2B1EA2AE257FDF0A00C33819 /* recipeType.xml */; };
+		2B1EA2B9257FE2E800C33819 /* PopUpStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1EA2B8257FE2E800C33819 /* PopUpStoryboard.storyboard */; };
+		2B1EA2BC257FE47000C33819 /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1EA2BB257FE47000C33819 /* CategoryPickerViewController.swift */; };
 		2B3018342578BBDA007D2CAB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3018332578BBDA007D2CAB /* SearchViewController.swift */; };
 		2B3018372578C82F007D2CAB /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3018362578C82F007D2CAB /* RecipeDetailsViewController.swift */; };
 		2B30183B2578E634007D2CAB /* ReportRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30183A2578E634007D2CAB /* ReportRecipeViewController.swift */; };
@@ -29,6 +32,10 @@
 		2BC7131F2577497D0008BA5D /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC7131E2577497D0008BA5D /* LoadingScreen.swift */; };
 		2BC7132625774BB60008BA5D /* 39067-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BC7132525774BB60008BA5D /* 39067-loading.json */; };
 		2BC71329257757D70008BA5D /* StructureFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC71328257757D70008BA5D /* StructureFile.swift */; };
+		2BC9361325821BD0007D6906 /* RecipeEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC9361225821BD0007D6906 /* RecipeEditViewController.swift */; };
+		2BC9361E25824AEB007D6906 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC9361D25824AEB007D6906 /* IngredientsTableViewCell.swift */; };
+		2BC9362125824B22007D6906 /* StepsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC9362025824B22007D6906 /* StepsTableViewCell.swift */; };
+		2BC93627258362F6007D6906 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC93626258362F6007D6906 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +53,9 @@
 		2B0F7A6325748DF400919C37 /* FavouriteRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRecipeViewController.swift; sourceTree = "<group>"; };
 		2B0F7A692574949F00919C37 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		2B0F7A6D2574A5C700919C37 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		2B1EA2AE257FDF0A00C33819 /* recipeType.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = recipeType.xml; sourceTree = "<group>"; };
+		2B1EA2B8257FE2E800C33819 /* PopUpStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopUpStoryboard.storyboard; sourceTree = "<group>"; };
+		2B1EA2BB257FE47000C33819 /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		2B3018332578BBDA007D2CAB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2B3018362578C82F007D2CAB /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		2B30183A2578E634007D2CAB /* ReportRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRecipeViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +66,10 @@
 		2BC7131E2577497D0008BA5D /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		2BC7132525774BB60008BA5D /* 39067-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "39067-loading.json"; sourceTree = "<group>"; };
 		2BC71328257757D70008BA5D /* StructureFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructureFile.swift; sourceTree = "<group>"; };
+		2BC9361225821BD0007D6906 /* RecipeEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditViewController.swift; sourceTree = "<group>"; };
+		2BC9361D25824AEB007D6906 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTableViewCell.swift; sourceTree = "<group>"; };
+		2BC9362025824B22007D6906 /* StepsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsTableViewCell.swift; sourceTree = "<group>"; };
+		2BC93626258362F6007D6906 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4C6F9888EF99DFA593A549AA /* Pods-Easy Cook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Cook.debug.xcconfig"; path = "Target Support Files/Pods-Easy Cook/Pods-Easy Cook.debug.xcconfig"; sourceTree = "<group>"; };
 		EDD47EBC4E905CCB867EE632 /* Pods-Easy Cook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Cook.release.xcconfig"; path = "Target Support Files/Pods-Easy Cook/Pods-Easy Cook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,11 +124,14 @@
 			isa = PBXGroup;
 			children = (
 				2BC7131425773EE60008BA5D /* ActivationViewController.swift */,
+				2B1EA2BB257FE47000C33819 /* CategoryPickerViewController.swift */,
 				2B0F7A6325748DF400919C37 /* FavouriteRecipeViewController.swift */,
 				2B0F7A1A2570E2CE00919C37 /* HomeViewController.swift */,
 				2B3018362578C82F007D2CAB /* RecipeDetailsViewController.swift */,
+				2BC9361225821BD0007D6906 /* RecipeEditViewController.swift */,
 				2B30183A2578E634007D2CAB /* ReportRecipeViewController.swift */,
 				2B3018332578BBDA007D2CAB /* SearchViewController.swift */,
+				2BC93626258362F6007D6906 /* TabBarViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -124,6 +141,7 @@
 			children = (
 				2B0F7A212570E2D100919C37 /* LaunchScreen.storyboard */,
 				2B0F7A1C2570E2CE00919C37 /* Main.storyboard */,
+				2B1EA2B8257FE2E800C33819 /* PopUpStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -133,8 +151,10 @@
 			children = (
 				2B0F7A6025747E5100919C37 /* FavouriteCollectionViewCell.swift */,
 				2B0F7A692574949F00919C37 /* FavouriteTableViewCell.swift */,
+				2BC9361D25824AEB007D6906 /* IngredientsTableViewCell.swift */,
 				2B0F7A5A2572BA8500919C37 /* PopularCollectionViewCell.swift */,
 				2B30183E2578EF4D007D2CAB /* RecipeTableViewCell.swift */,
+				2BC9362025824B22007D6906 /* StepsTableViewCell.swift */,
 				2BC71328257757D70008BA5D /* StructureFile.swift */,
 			);
 			path = "Object Class";
@@ -152,6 +172,7 @@
 		2BC7130B257730050008BA5D /* Database File */ = {
 			isa = PBXGroup;
 			children = (
+				2B1EA2AE257FDF0A00C33819 /* recipeType.xml */,
 				2BC7130C25773A620008BA5D /* recipeList.xml */,
 				2BC712E82574CDCB0008BA5D /* FMDBDatabaseModel.swift */,
 			);
@@ -248,6 +269,8 @@
 				2B0F7A202570E2D100919C37 /* Assets.xcassets in Resources */,
 				2BC7132625774BB60008BA5D /* 39067-loading.json in Resources */,
 				2B0F7A1E2570E2CE00919C37 /* Main.storyboard in Resources */,
+				2B1EA2B9257FE2E800C33819 /* PopUpStoryboard.storyboard in Resources */,
+				2B1EA2AF257FDF0B00C33819 /* recipeType.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,10 +325,15 @@
 			files = (
 				2B0F7A6425748DF400919C37 /* FavouriteRecipeViewController.swift in Sources */,
 				2BC7131F2577497D0008BA5D /* LoadingScreen.swift in Sources */,
+				2B1EA2BC257FE47000C33819 /* CategoryPickerViewController.swift in Sources */,
 				2B0F7A5B2572BA8500919C37 /* PopularCollectionViewCell.swift in Sources */,
+				2BC93627258362F6007D6906 /* TabBarViewController.swift in Sources */,
+				2BC9361325821BD0007D6906 /* RecipeEditViewController.swift in Sources */,
+				2BC9362125824B22007D6906 /* StepsTableViewCell.swift in Sources */,
 				2B3018372578C82F007D2CAB /* RecipeDetailsViewController.swift in Sources */,
 				2BC71329257757D70008BA5D /* StructureFile.swift in Sources */,
 				2BC7131525773EE60008BA5D /* ActivationViewController.swift in Sources */,
+				2BC9361E25824AEB007D6906 /* IngredientsTableViewCell.swift in Sources */,
 				2B0F7A1B2570E2CE00919C37 /* HomeViewController.swift in Sources */,
 				2B0F7A6125747E5100919C37 /* FavouriteCollectionViewCell.swift in Sources */,
 				2B0F7A6E2574A5C700919C37 /* Utility.swift in Sources */,

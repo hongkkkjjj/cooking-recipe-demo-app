@@ -71,7 +71,13 @@ extension FavouriteRecipeViewController: UITableViewDataSource, UITableViewDeleg
         if let cell = favouriteRecipeTableView.dequeueReusableCell(withIdentifier: "FavouriteTableViewCell", for: indexPath) as? FavouriteTableViewCell {
             
             cell.recipeTitleLabel.text = recipeList[indexPath.row].name
-            cell.recipeImageView?.sd_setImage(with: URL(string: recipeList[indexPath.row].image), placeholderImage: nil)
+            if recipeList[indexPath.row].image.contains("https"), let url = URL(string: recipeList[indexPath.row].image) {
+                cell.recipeImageView?.sd_setImage(with: url, placeholderImage: nil)
+            } else {
+                if let data = recipeList[indexPath.row].image.fromBase64() {
+                    cell.recipeImageView.image = UIImage(data: data)
+                }
+            }
             cell.recipeLikeLabel.text = "\(recipeList[indexPath.row].likes) likes"
             
             return cell
