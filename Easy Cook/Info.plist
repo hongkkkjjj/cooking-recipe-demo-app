@@ -62,5 +62,9 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Easy Cook want to access your camera to capture recipe image.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Easy Cook want to access your photo library to capture recipe image.</string>
 </dict>
 </plist>

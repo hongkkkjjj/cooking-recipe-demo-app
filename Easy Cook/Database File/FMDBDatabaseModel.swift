@@ -239,7 +239,7 @@ class FMDBDatabaseModel: NSObject {
         return recipeArr
     }
     
-    internal static func updateRecipe(id: Int, type: ValueType, value: Int, addFavor: Bool = false) -> Bool {
+    internal static func updateRecipeViewAndLike(id: Int, type: ValueType, value: Int, addFavor: Bool = false) -> Bool {
         var success = false
         
         if let dbQueue = FMDatabaseQueue(path: databasePath) {
@@ -274,13 +274,16 @@ class FMDBDatabaseModel: NSObject {
             dbQueue.inDatabase { (db: FMDatabase) in
                 if let rs = db.executeQuery("SELECT rid FROM favor_recipe WHERE rid = ?", withArgumentsIn: [rid]) {
                     while rs.next() {
-                        count += 1
+                        let id = Int(rs.int(forColumn: "rid"))
+                        if id == rid {
+                            count += 1
+                        }
                     }
                 }
             }
         }
         
-        return count > 0
+        return count == 1
     }
     
     internal static func removeRecipe(rid: Int) -> Bool {
@@ -299,14 +302,30 @@ class FMDBDatabaseModel: NSObject {
         return success
     }
     
+    internal static func getUniqueCategoryType() -> [String] {
+        var result: [String] = []
+        
+        if let dbQueue = FMDatabaseQueue(path: databasePath) {
+            dbQueue.inDatabase { (db: FMDatabase) in
+                if let rs = db.executeQuery("SELECT DISTINCT category FROM recipe_list", withArgumentsIn: []) {
+                    while rs.next() {
+                        if let category = rs.string(forColumn: "category") {
+                            result.append(category)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return result
+    }
+    
     internal static func getMaximumRecipe() -> [RecipeDetail] {
         var recipeArr: [RecipeDetail] = []
         if let dbQueue = FMDatabaseQueue(path: databasePath) {
             dbQueue.inDatabase { (db: FMDatabase) in
                 if let rs = db.executeQuery("SELECT * FROM recipe_list ORDER BY RANDOM()", withArgumentsIn: []) {
-                    var index = 0
                     while rs.next() {
-                        index += 1
                         var recipe = RecipeDetail()
                         recipe.id = Int(rs.int(forColumn: "rid"))
                         recipe.name = rs.string(forColumn: "name") ?? ""
@@ -315,7 +334,7 @@ class FMDBDatabaseModel: NSObject {
                         recipe.view = Int(rs.int(forColumn: "view"))
                         recipe.likes = Int(rs.int(forColumn: "likes"))
                         
-                        if let ingredientRs = db.executeQuery("SELECT ingredient FROM recipe_ingredient WHERE rid = ?", withArgumentsIn: [index]) {
+                        if let ingredientRs = db.executeQuery("SELECT ingredient FROM recipe_ingredient WHERE rid = ?", withArgumentsIn: [recipe.id]) {
                             while ingredientRs.next() {
                                 let ingredient = ingredientRs.string(forColumn: "ingredient") ?? ""
                                 recipe.ingredients.append(ingredient)
@@ -323,7 +342,7 @@ class FMDBDatabaseModel: NSObject {
                         }
                         
                         var stepList: [RecipeStep] = []
-                        if let stepRs = db.executeQuery("SELECT step, desc FROM recipe_step WHERE rid = ? ORDER BY step", withArgumentsIn: [index]) {
+                        if let stepRs = db.executeQuery("SELECT step, desc FROM recipe_step WHERE rid = ? ORDER BY step", withArgumentsIn: [recipe.id]) {
                             while stepRs.next() {
                                 let stepNum = Int(stepRs.int(forColumn: "step"))
                                 let desc = stepRs.string(forColumn: "desc") ?? ""
@@ -340,6 +359,131 @@ class FMDBDatabaseModel: NSObject {
             }
         }
         return recipeArr
+    }
+    
+    internal static func updateRecipeDetail(recipe: RecipeDetail, stepDiff: Int) -> Bool {
+        var success = false
+        
+        if let dbQueue = FMDatabaseQueue(path: databasePath) {
+            dbQueue.inDatabase { (db: FMDatabase) in
+                success = db.executeUpdate("UPDATE recipe_list SET name = ?, image = ?, category = ? WHERE rid = ?", withArgumentsIn: [recipe.name, recipe.image, recipe.category, recipe.id])
+                
+                let rid = recipe.id
+                let ingredients = recipe.ingredients
+                let steps = recipe.steps
+                let stepIndex = steps.count - 1
+                
+                // update ingredients
+                // remove all ingredients and insert again
+                success = db.executeUpdate("DELETE FROM recipe_ingredient WHERE rid = ?", withArgumentsIn: [rid])
+                
+                for ingredient in ingredients {
+                    success = db.executeUpdate("INSERT INTO recipe_ingredient (rid, ingredient) VALUES (?, ?)", withArgumentsIn: [rid, ingredient])
+                }
+                
+                // update steps
+                for i in 0 ... stepIndex {
+                    success = db.executeUpdate("UPDATE recipe_step SET desc = ? WHERE rid = ? AND step = ?", withArgumentsIn: [steps[i], rid, i + 1])
+                }
+                
+                if stepDiff > 0 {
+                    // delete
+                    for j in steps.count + 1 ... steps.count + stepDiff {
+                        success = db.executeUpdate("DELETE FROM recipe_step WHERE rid = ? AND step = ?", withArgumentsIn: [rid, j])
+                    }
+                } else if stepDiff < 0 {
+                    // insert
+                    for k in steps.count + stepDiff ... stepIndex {
+                        success = db.executeUpdate("INSERT INTO recipe_step (rid, step, desc) VALUES (?, ?, ?)", withArgumentsIn: [rid, k + 1, steps[k]])
+                    }
+                }
+            }
+        }
+        
+        return success
+    }
+    
+    internal static func updateRecipeStep(rid: Int, steps: [String], diff: Int) -> Bool {
+        var success = false
+        
+        if let dbQueue = FMDatabaseQueue(path: databasePath) {
+            dbQueue.inDatabase { (db: FMDatabase) in
+                
+            }
+        }
+        
+        return success
+    }
+    
+    internal static func getSelectedRecipe(rid: Int) -> RecipeDetail? {
+        if let dbQueue = FMDatabaseQueue(path: databasePath) {
+            var recipe = RecipeDetail()
+            dbQueue.inDatabase { (db: FMDatabase) in
+                if let rs = db.executeQuery("SELECT * FROM recipe_list WHERE rid = ?", withArgumentsIn: [rid]) {
+                    while rs.next() {
+                        recipe.id = Int(rs.int(forColumn: "rid"))
+                        recipe.name = rs.string(forColumn: "name") ?? ""
+                        recipe.image = rs.string(forColumn: "image") ?? ""
+                        recipe.category = rs.string(forColumn: "category") ?? ""
+                        recipe.view = Int(rs.int(forColumn: "view"))
+                        recipe.likes = Int(rs.int(forColumn: "likes"))
+                        
+                        if let ingredientRs = db.executeQuery("SELECT ingredient FROM recipe_ingredient WHERE rid = ?", withArgumentsIn: [rid]) {
+                            while ingredientRs.next() {
+                                let ingredient = ingredientRs.string(forColumn: "ingredient") ?? ""
+                                recipe.ingredients.append(ingredient)
+                            }
+                        }
+                        
+                        var stepList: [RecipeStep] = []
+                        if let stepRs = db.executeQuery("SELECT step, desc FROM recipe_step WHERE rid = ? ORDER BY step", withArgumentsIn: [rid]) {
+                            while stepRs.next() {
+                                let stepNum = Int(stepRs.int(forColumn: "step"))
+                                let desc = stepRs.string(forColumn: "desc") ?? ""
+                                let recipeStep = RecipeStep(id: stepNum, desc: desc)
+                                stepList.append(recipeStep)
+                            }
+                        }
+                        for step in stepList {
+                            recipe.steps.append(step.desc)
+                        }
+                    }
+                }
+            }
+            if recipe.name.isEmpty {
+                return nil
+            } else {
+                return recipe
+            }
+        }
+        return nil
+    }
+    
+    internal static func insertNewData(recipe: RecipeDetail) -> Int {
+        var rid = 0
+        
+        if let dbQueue = FMDatabaseQueue(path: databasePath) {
+            dbQueue.inDatabase { (db: FMDatabase) in
+                db.executeUpdate("INSERT INTO recipe_list (name, image, category, likes, view) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [recipe.name, recipe.image, recipe.category, recipe.likes, recipe.view])
+                
+                if let rs = db.executeQuery("SELECT rid FROM recipe_list WHERE name = ? AND category = ? AND image = ? AND likes = ? AND view = ?", withArgumentsIn: [recipe.name, recipe.category, recipe.image, recipe.likes, recipe.view]) {
+                    while rs.next() {
+                        rid = Int(rs.int(forColumn: "rid"))
+                    }
+                }
+                
+                for ingredient in recipe.ingredients {
+                    db.executeUpdate("INSERT INTO recipe_ingredient (rid, ingredient) VALUES (?, ?)", withArgumentsIn: [rid, ingredient])
+                }
+                
+                var stepNum = 0
+                for step in recipe.steps {
+                    stepNum += 1
+                    db.executeUpdate("INSERT INTO recipe_step (rid, step, desc) VALUES (?, ?, ?)", withArgumentsIn: [rid, stepNum, step])
+                }
+            }
+        }
+        return rid
     }
     
     enum ValueType {
